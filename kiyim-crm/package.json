@@ -1,0 +1,30 @@
+{
+  "name": "libos-crm",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "LIBOS CRM — chakana kiyim do'koni boshqaruvi (React + Express + MongoDB)",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "up": "docker compose up -d --build",
+    "down": "docker compose down",
+    "logs": "docker compose logs -f",
+    "wipe": "docker compose down -v"
+  },
+  "dependencies": {
+    "lucide-react": "^0.344.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.22.3",
+    "recharts": "^2.12.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.2.1",
+    "autoprefixer": "^10.4.18",
+    "postcss": "^8.4.35",
+    "tailwindcss": "^3.4.1",
+    "vite": "^5.1.6"
+  }
+}

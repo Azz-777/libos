@@ -1,0 +1,39 @@
+services:
+  mongo:
+    image: mongo:7
+    container_name: libos-mongo
+    restart: unless-stopped
+    volumes:
+      - mongo_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 15s
+
+  backend:
+    build: ./backend
+    container_name: libos-backend
+    restart: unless-stopped
+    depends_on:
+      mongo:
+        condition: service_healthy
+    environment:
+      MONGODB_URI:    mongodb://mongo:27017/libos
+      JWT_SECRET:     ${JWT_SECRET:-libos-crm-prod-secret-change-me-min-32x}
+      JWT_EXPIRES_IN: 7d
+      PORT:           3001
+      CLIENT_ORIGIN:  "*"
+
+  frontend:
+    build: .
+    container_name: libos-frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "${WEB_PORT:-80}:80"
+
+volumes:
+  mongo_data:
