@@ -1,0 +1,20 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Kodni yuklab olish
+      uses: actions/checkout@v4
+
+    # Mana shu qismga working-directory qo'shildi, shunda Dockerfile'ni to'g'ri papkadan qidiradi
+    - name: Build the Docker image
+      working-directory: ./kiyim-crm
+      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
