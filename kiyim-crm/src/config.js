@@ -1,6 +1,6 @@
 export const APP = {
-  name: 'LIBOS',
-  full: 'LIBOS CRM',
+  name: 'Kiyim',
+  full: 'Kiyim CRM',
   tagline: "Kiyim do'koningiz uchun zamonaviy boshqaruv tizimi",
 }
 
